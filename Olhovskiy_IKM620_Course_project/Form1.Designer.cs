@@ -67,7 +67,7 @@ namespace Olhovskiy_IKM620_Course_project
             // 
             // tClock
             // 
-            this.tClock.Interval = 25000;
+            this.tClock.Interval = 20000;
             this.tClock.Tick += new System.EventHandler(this.tClock_Tick);
             // 
             // Form1
