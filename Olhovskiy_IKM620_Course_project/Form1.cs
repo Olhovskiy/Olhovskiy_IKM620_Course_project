@@ -28,10 +28,11 @@ namespace Olhovskiy_IKM620_Course_project
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            MajorObject = new MajorWork();
+            MajorObject.SetTime();
             About A = new About(); 
             A.tAbout.Start();
-            A.ShowDialog(); 
-            MajorObject = new MajorWork();
+            A.ShowDialog();
             this.Mode = true;
         }
 
@@ -72,6 +73,13 @@ namespace Olhovskiy_IKM620_Course_project
                 tClock.Start();
                 e.KeyChar = (char)0;
             }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            string s;
+            s = (System.DateTime.Now - MajorObject.GetTime()).ToString();
+            MessageBox.Show(s, "Час роботи програми");
         }
     }
 }

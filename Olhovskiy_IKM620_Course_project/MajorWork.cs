@@ -8,8 +8,17 @@ namespace Olhovskiy_IKM620_Course_project
 {
     class MajorWork
     {
+        private System.DateTime TimeBegin;
         private string Data;
         private string Result;
+        public void SetTime() 
+        {
+            this.TimeBegin = System.DateTime.Now;
+        }
+        public System.DateTime GetTime() 
+        {
+            return this.TimeBegin;
+        }
         public void Write(string D)
         {
             this.Data = D;
