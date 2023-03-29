@@ -30,6 +30,7 @@ namespace Olhovskiy_IKM620_Course_project
         {
             MajorObject = new MajorWork();
             MajorObject.SetTime();
+            MajorObject.Modify = false;
             About A = new About();
             A.tAbout.Start();
             A.ShowDialog();
@@ -99,7 +100,8 @@ namespace Olhovskiy_IKM620_Course_project
         {
             if (sfdSave.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show(sfdSave.FileName);
+                MajorObject.WriteSaveFileName(sfdSave.FileName); 
+                MajorObject.SaveToFile();
             }
         }
 
