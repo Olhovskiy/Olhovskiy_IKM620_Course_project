@@ -70,6 +70,7 @@ namespace Olhovskiy_IKM620_Course_project
                 D.Data = this.Data;
                 D.Result = Convert.ToString(this.Result);
                 D.Key = Key;
+                Key++;
                 BinaryFormatter BF = new BinaryFormatter();
                 S.Flush();
                 S.Close();
@@ -81,6 +82,73 @@ namespace Olhovskiy_IKM620_Course_project
             }
 
         }
-
+        public void ReadFromFile(System.Windows.Forms.DataGridView DG)
+        {
+            try
+            {
+                if (!File.Exists(this.OpenFileName))
+                {
+                    MessageBox.Show("Файлу немає"); 
+                    return;
+                }
+                Stream S; 
+                S = File.Open(this.OpenFileName, FileMode.Open);
+                Buffer D;
+                object O;
+                BinaryFormatter BF = new BinaryFormatter();
+                while (S.Position < S.Length)
+                {
+                    O = BF.Deserialize(S); 
+                    D = O as Buffer;
+                    if (D == null) break;
+                   
+                }
+                S.Close(); 
+            }
+            catch
+            {
+                MessageBox.Show("Помилка файлу"); 
+            }
+        }
+        public void Generator() 
+        {
+            try
+            {
+                if (!File.Exists(this.SaveFileName)) 
+                {
+                    Key = 1;
+                    return;
+                }
+                Stream S; 
+                S = File.Open(this.SaveFileName, FileMode.Open);
+                Buffer D;
+                object O; 
+                BinaryFormatter BF = new BinaryFormatter(); 
+                while (S.Position < S.Length)
+                {
+                    O = BF.Deserialize(S);
+                    D = O as Buffer;
+                    if (D == null) break;
+                    Key = D.Key;
+                }
+                Key++;
+                S.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Помилка файлу"); 
+            }
+        }
+        public bool SaveFileNameExists()
+        {
+            if (this.SaveFileName == null)
+                return false;
+            else return true;
+        }
+        public void NewRec() 
+        {
+            this.Data = ""; 
+            this.Result = null; 
+        }
     }
 }
