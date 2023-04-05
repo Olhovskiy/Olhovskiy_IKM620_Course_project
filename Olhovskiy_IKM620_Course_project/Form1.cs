@@ -110,7 +110,8 @@ namespace Olhovskiy_IKM620_Course_project
         {
             if (ofdOpen.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show(ofdOpen.FileName);
+                MajorObject.WriteOpenFileName(ofdOpen.FileName); 
+                MajorObject.ReadFromFile(dgwOpen);
             }
         }
 
@@ -162,6 +163,11 @@ namespace Olhovskiy_IKM620_Course_project
                 if (MessageBox.Show("Дані не були збережені. Продовжити вихід?", "УВАГА",
                 MessageBoxButtons.YesNo) == DialogResult.No)
                     e.Cancel = true; 
+        }
+
+        private void bSearch_Click(object sender, EventArgs e)
+        {
+            MajorObject.Find(tbSearch.Text);
         }
     }
 }      
