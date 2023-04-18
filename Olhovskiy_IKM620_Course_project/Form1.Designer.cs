@@ -55,14 +55,22 @@ namespace Olhovskiy_IKM620_Course_project
             this.dgwOpen = new System.Windows.Forms.DataGridView();
             this.bSearch = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwOpen)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // bStart
             // 
             this.bStart.Font = new System.Drawing.Font("Nirmala UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bStart.Location = new System.Drawing.Point(288, 264);
+            this.bStart.Location = new System.Drawing.Point(337, 239);
             this.bStart.Name = "bStart";
             this.bStart.Size = new System.Drawing.Size(183, 68);
             this.bStart.TabIndex = 0;
@@ -73,7 +81,7 @@ namespace Olhovskiy_IKM620_Course_project
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(343, 41);
+            this.label1.Location = new System.Drawing.Point(416, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
@@ -83,7 +91,7 @@ namespace Olhovskiy_IKM620_Course_project
             // 
             this.tbInput.Enabled = false;
             this.tbInput.Font = new System.Drawing.Font("Mongolian Baiti", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbInput.Location = new System.Drawing.Point(177, 136);
+            this.tbInput.Location = new System.Drawing.Point(249, 125);
             this.tbInput.Name = "tbInput";
             this.tbInput.Size = new System.Drawing.Size(371, 63);
             this.tbInput.TabIndex = 2;
@@ -234,14 +242,14 @@ namespace Olhovskiy_IKM620_Course_project
             // dgwOpen
             // 
             this.dgwOpen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwOpen.Location = new System.Drawing.Point(579, 90);
+            this.dgwOpen.Location = new System.Drawing.Point(22, 15);
             this.dgwOpen.Name = "dgwOpen";
-            this.dgwOpen.Size = new System.Drawing.Size(398, 242);
+            this.dgwOpen.Size = new System.Drawing.Size(494, 342);
             this.dgwOpen.TabIndex = 5;
             // 
             // bSearch
             // 
-            this.bSearch.Location = new System.Drawing.Point(767, 363);
+            this.bSearch.Location = new System.Drawing.Point(651, 73);
             this.bSearch.Name = "bSearch";
             this.bSearch.Size = new System.Drawing.Size(75, 23);
             this.bSearch.TabIndex = 6;
@@ -251,22 +259,64 @@ namespace Olhovskiy_IKM620_Course_project
             // 
             // tbSearch
             // 
-            this.tbSearch.Location = new System.Drawing.Point(742, 426);
+            this.tbSearch.Location = new System.Drawing.Point(617, 117);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(146, 20);
             this.tbSearch.TabIndex = 7;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 27);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1006, 469);
+            this.tabControl1.TabIndex = 8;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.tbInput);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.bStart);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(998, 443);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Введення даних";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dgwOpen);
+            this.tabPage2.Controls.Add(this.tbSearch);
+            this.tabPage2.Controls.Add(this.bSearch);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(998, 443);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Робота з файлами";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 491);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1018, 22);
+            this.statusStrip1.TabIndex = 9;
+            this.statusStrip1.Text = "statusStrip1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1018, 513);
-            this.Controls.Add(this.tbSearch);
-            this.Controls.Add(this.bSearch);
-            this.Controls.Add(this.dgwOpen);
-            this.Controls.Add(this.tbInput);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.bStart);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -276,6 +326,11 @@ namespace Olhovskiy_IKM620_Course_project
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwOpen)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,6 +363,11 @@ namespace Olhovskiy_IKM620_Course_project
         private System.Windows.Forms.DataGridView dgwOpen;
         private System.Windows.Forms.Button bSearch;
         private System.Windows.Forms.TextBox tbSearch;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }
 
