@@ -79,6 +79,7 @@ namespace Olhovskiy_IKM620_Course_project
                 D.Key = Key;
                 Key++;
                 BinaryFormatter BF = new BinaryFormatter();
+                BF.Serialize(S, D);
                 S.Flush();
                 S.Close();
                 this.Modify = false;
