@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.IO.Ports;
 
 namespace Olhovskiy_IKM620_Course_project
 {
@@ -19,6 +21,8 @@ namespace Olhovskiy_IKM620_Course_project
         ToolStripLabel timeLabel;
         ToolStripLabel infoLabel;
         Timer timer;
+        string InputData = String.Empty;
+        delegate void SetTextCallback(string text);
         public Form1()
         {
             InitializeComponent();
@@ -58,6 +62,12 @@ namespace Olhovskiy_IKM620_Course_project
             this.Mode = true;
             toolTip1.SetToolTip(bSearch, "Натисніть на кнопку для пошуку"); 
             toolTip1.IsBalloon = true;
+
+            string[] ports = SerialPort.GetPortNames();
+            foreach (string port in ports)
+            {
+                comboBox1.Items.Add(port);
+            };
         }
 
         private void bStart_Click(object sender, EventArgs e)
@@ -103,6 +113,7 @@ namespace Olhovskiy_IKM620_Course_project
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            
             string s;
             s = (System.DateTime.Now - MajorObject.GetTime()).ToString();
             MessageBox.Show(s, "Час роботи програми");
@@ -184,6 +195,8 @@ namespace Olhovskiy_IKM620_Course_project
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Application.DoEvents();
+
             if (MajorObject.Modify)
                 if (MessageBox.Show("Дані не були збережені. Продовжити вихід?", "УВАГА",
                 MessageBoxButtons.YesNo) == DialogResult.No)
@@ -365,6 +378,128 @@ namespace Olhovskiy_IKM620_Course_project
             if (o.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text = File.ReadAllText(o.FileName, Encoding.Default);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (button2.Text == "Старт")
+
+            {
+                if (port.IsOpen) port.Close();
+                #region Задаем параметры порта
+                port.PortName = comboBox1.Text;
+                port.BaudRate = Convert.ToInt32(comboBox2.Text);
+                port.DataBits = Convert.ToInt32(comboBox3.Text);
+                switch (comboBox4.Text)
+                {
+                    case "Пробел":
+                        port.Parity = Parity.Space;
+                        break;
+                    case "Чет":
+                        port.Parity = Parity.Even;
+                        break;
+                    case "Нечет":
+                        port.Parity = Parity.Odd;
+                        break;
+                    case "Маркер":
+                        port.Parity = Parity.Mark;
+                        break;
+                    default:
+                        port.Parity = Parity.None;
+                        break;
+                }
+                switch (comboBox5.Text)
+                {
+                    case "2":
+                        port.StopBits = StopBits.Two;
+                        break;
+                    case "1.5":
+                        port.StopBits = StopBits.OnePointFive;
+                        break;
+                    case "Нет":
+                        port.StopBits = StopBits.None;
+                        break;
+
+                    default:
+                        port.StopBits = StopBits.One;
+                        break;
+                }
+                switch (comboBox6.Text)
+                {
+                    case "Xon/Xoff":
+                        port.Handshake = Handshake.XOnXOff;
+                        break;
+                    case "Аппаратное":
+                        port.Handshake = Handshake.RequestToSend;
+                        break;
+                    default:
+                        port.Handshake = Handshake.None;
+                        break;
+                }
+                #endregion
+                try
+                {
+                    port.Open();
+                    button2.Text = "Стоп";
+                    // button2.Enabled = false;
+                }
+                catch
+                {
+                    MessageBox.Show("Порт " + port.PortName + " неможливо відкрити!",
+
+                    "Помилка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    comboBox1.SelectedText = "";
+                    button2.Text = "Старт";
+                }
+            }
+            else
+            {
+                if (port.IsOpen) port.Close();
+                button2.Text = "Старт";
+                // button2.Enabled = true;
+            }
+
+        }
+        void AddData(string text)
+        {
+            listBox1.Items.Add(text);
+        }
+        private void SetText(string text)
+        {
+            if (this.listBox1.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.AddData(text);
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.Text != "")
+
+            {
+                groupBox2.Enabled = true;
+                button2.Enabled = true;
+            }
+            else
+            {
+                groupBox2.Enabled = false;
+                button2.Enabled = false;
+            }
+        }
+
+        private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            InputData = port.ReadExisting();
+            if (InputData != String.Empty)
+            {
+                SetText(InputData);
             }
         }
     }
